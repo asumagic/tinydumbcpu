@@ -12,7 +12,7 @@ begin
 	$readmemb("pmem_bytecode.txt", bytes);
 end
 
-always @(posedge clock)
+always @(address)
 begin
 	data_out <= bytes[address];
 end

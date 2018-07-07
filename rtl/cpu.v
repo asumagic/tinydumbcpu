@@ -22,19 +22,19 @@ ram tape
 
 rom_pmem pmem
 (
-	.clock       (clock),
-	.address     (pmem_addr),
-	.data_out    (pmem_data_read)
+	.clock   (clock),
+	.address (pmem_addr),
+	.data_out(pmem_data_read)
 );
 
 core cpu
 (
 	.clock          (clock),
 	.tape_we        (tape_we),
-	.tape_addr      (tape_addr),
+	.sp             (tape_addr),
 	.tape_data_read (tape_data_read),
 	.tape_data_write(tape_data_write),
-	.pmem_addr      (pmem_addr),
+	.pc             (pmem_addr),
 	.pmem_data_read (pmem_data_read)
 );
 

@@ -12,7 +12,17 @@ module ram #(parameter addr_bits = 16, parameter data_bits = 8)
 
 	reg [data_bits - 1:0] bytes [(1 << addr_bits) - 1:0];
 
-always @(posedge clock)
+	integer i; // For memory initialization
+
+initial
+begin
+	for (i = 0; i < (1 << addr_bits) - 1; i = i + 1)
+	begin
+		bytes[i] <= { data_bits{1'b0} };
+	end
+end
+
+always @(address, write_enable)
 begin
 	data_out <= bytes[address];
 
