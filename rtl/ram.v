@@ -6,11 +6,11 @@ module ram #(parameter addr_bits = 16, parameter data_bits = 8)
 
 	input wire [addr_bits - 1:0] address,
 
-	input wire [(1 << data_bits) - 1:0] data_in,
-	output reg [(1 << data_bits) - 1:0] data_out
+	input wire [data_bits - 1:0] data_in,
+	output reg [data_bits - 1:0] data_out
 );
 
-	reg [(1 << data_bits) - 1:0] bytes [(1 << addr_bits) - 1:0];
+	reg [data_bits - 1:0] bytes [(1 << addr_bits) - 1:0];
 
 always @(posedge clock)
 begin
