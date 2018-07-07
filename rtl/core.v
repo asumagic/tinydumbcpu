@@ -54,7 +54,7 @@ module core
 `define WB_TAPE         `WB_WIDTH'd2
 
 // Program counter
-reg [15:0] pc;
+reg [15:0] pc, nextpc;
 
 // Stack pointer (i.e. tape pointer)
 reg [15:0] sp;
@@ -242,7 +242,8 @@ begin
 
 	`STATE_WRITEBACK:
 	begin
-		pc <= pc + 1;
+		pc <= nextpc;
+		nextpc <= pc + 1;
 
 		if (wb_en)
 		begin
@@ -250,7 +251,7 @@ begin
 
 			`WB_PC:
 			begin
-				pc <= alu_data; // Overwrite PC
+				nextpc <= nextpc + 2; // Overwrite PC
 			end
 
 			`WB_SP:
