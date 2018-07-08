@@ -1,1 +1,7 @@
 build/
+
+c5g/quartus/*
+!*.qpf
+!*.qsf
+!*.sdc
+!*.sv
