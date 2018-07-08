@@ -18,7 +18,7 @@ wire [2:0] pmem_data_read;
 
 ram tape
 (
-	.clock       (clock),
+	.clock,
 	.write_enable(tape_we),
 	.address     (tape_addr),
 	.data_in     (tape_data_write),
@@ -27,14 +27,14 @@ ram tape
 
 rom_pmem pmem
 (
-	.clock   (clock),
+	.clock,
 	.address (pmem_addr),
 	.data_out(pmem_data_read)
 );
 
 core cpu
 (
-	.clock          (clock),
+	.clock,
 	.tape_we        (tape_we),
 	.sp             (tape_addr),
 	.tape_data_read (tape_data_read),
