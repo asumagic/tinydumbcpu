@@ -19,7 +19,7 @@ begin
 	bytes <= '{default:8'b0};
 end
 
-always @(address, write_enable)
+always @(address, data_in, write_enable)
 begin
 	if (write_enable)
 	begin
