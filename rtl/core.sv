@@ -116,8 +116,6 @@ begin
 	begin
 		state <= `STATE_ALU_EXECUTE;
 
-		//$display("Decoding pc %d, opcode %d, tape %d", pc, opcode, tape_data_read);
-
 		case (opcode)
 
 		`INSTR_INC:
@@ -245,8 +243,6 @@ begin
 	`STATE_SKIP:
 	begin
 		state <= `STATE_SKIP;
-
-		//$display("skip cycle, pc %d, depth %d", pc, depth_counter);
 
 		case (skip_dir)
 
