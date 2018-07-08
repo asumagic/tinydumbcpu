@@ -6,6 +6,8 @@ This is a multiple cycle CPU.
 
 ### Status
 
+- Can run mandelbrot compiled through bfcompiler in Icarus Verilog.
+- Character input unimplemented.
 - Untested on hardware (fpga)
 
 ### Instruction set
