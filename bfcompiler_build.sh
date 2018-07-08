@@ -3,6 +3,8 @@
 mkdir build
 cd build
 
-g++ -Os ../bfcompiler main.cpp -Wall -Wextra -o ./bfc
+echo "=> Compiling source compiler"
+
+g++ -std=c++17 -Os ../bfcompiler/main.cpp -Wall -Wextra -o ./bfc
 
 cd ../
