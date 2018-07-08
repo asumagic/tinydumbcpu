@@ -12,7 +12,10 @@ module core
 
 	// Program ROM
 	output reg [15:0] pc,
-	input wire [2:0] pmem_data_read
+	input wire [2:0] pmem_data_read,
+
+	output reg out_en,
+	output reg [7:0] out_data
 );
 
 // State definitions
@@ -85,6 +88,8 @@ end
 always @(posedge clock)
 begin
 	alu_data <= 0; // to clean up the upper bits
+	out_en <= 0;
+	out_data <= 0;
 	tape_we <= 0;
 
 	// Handle what the current state is supposed to do
@@ -183,7 +188,8 @@ begin
 
 		`INSTR_COUT:
 		begin
-			$display("'%c' (%d)", tape_data_read, tape_data_read);
+			out_en <= 1;
+			out_data <= tape_data_read;
 			state <= `STATE_FETCH;
 			pc <= pc + 1;
 		end

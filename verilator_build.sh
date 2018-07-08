@@ -9,6 +9,6 @@ verilator -Wall -O3 -I../rtl/ -cc ../rtl/cpu.sv --top-module cpu --exe ../../tb/
 cd obj_dir
 
 echo "=> Building verilator sources"
-make OPT_FAST="-O3" -f ./Vcpu.mk Vcpu
+make OPT_FAST="-O3" -f ./Vcpu.mk Vcpu -j4
 
 cd ../../

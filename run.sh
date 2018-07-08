@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if (( $# != 1 )); then
 	echo "Bad number of parameters! Expected 1, got $#."
 	echo "Syntax: ./run.sh source.bf"

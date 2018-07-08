@@ -2,7 +2,10 @@
 
 module cpu
 (
-	input clock
+	input clock,
+
+	output out_en,
+	output [7:0] out_data
 );
 
 wire tape_we;
@@ -35,7 +38,9 @@ core cpu
 	.tape_data_read (tape_data_read),
 	.tape_data_write(tape_data_write),
 	.pc             (pmem_addr),
-	.pmem_data_read (pmem_data_read)
+	.pmem_data_read (pmem_data_read),
+	.out_en         (out_en),
+	.out_data       (out_data)
 );
 
 endmodule
