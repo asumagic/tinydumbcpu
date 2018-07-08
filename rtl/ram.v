@@ -21,9 +21,14 @@ end
 always @(address, write_enable)
 begin
 	if (write_enable)
+	begin
 		bytes[address] <= data_in;
+		data_out <= { data_bits{1'bX} };
+	end
 	else
+	begin
 		data_out <= bytes[address];
+	end
 end
 
 endmodule
