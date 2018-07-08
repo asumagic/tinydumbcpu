@@ -2,6 +2,8 @@
 
 module rom_pmem
 (
+	input wire clock,
+
 	input wire [15:0] address,
 	output reg [2:0] data_out
 );
@@ -13,9 +15,9 @@ begin
 	$readmemb("pmem_bytecode.txt", bytes);
 end
 
-always @(address)
+always @(negedge clock)
 begin
-	data_out = bytes[address];
+	data_out <= bytes[address];
 end
 
 endmodule

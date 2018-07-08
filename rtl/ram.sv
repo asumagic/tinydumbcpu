@@ -2,6 +2,8 @@
 
 module ram #(parameter addr_bits = 16, parameter data_bits = 8)
 (
+	input wire clock,
+
 	input wire write_enable,
 
 	input wire [addr_bits - 1:0] address,
@@ -17,16 +19,16 @@ begin
 	bytes = '{default:0};
 end
 
-always @(address, data_in, write_enable)
+always @(negedge clock)
 begin
 	if (write_enable)
 	begin
-		bytes[address] = data_in;
-		data_out = 'X;
+		bytes[address] <= data_in;
+		data_out <= 'X;
 	end
 	else
 	begin
-		data_out = bytes[address];
+		data_out <= bytes[address];
 	end
 end
 
