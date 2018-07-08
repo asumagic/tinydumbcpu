@@ -1,0 +1,119 @@
+#============================================================
+# Build by Terasic System Builder
+#============================================================
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CGXFC5C6F27C7
+set_global_assignment -name TOP_LEVEL_ENTITY c5g_top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "14.0"
+set_global_assignment -name LAST_QUARTUS_VERSION "17.1.0 Lite Edition"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:50:06 JULY 08,2018"
+set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 672
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 8_H6
+
+#============================================================
+# CLOCK
+#============================================================
+set_location_assignment PIN_U12 -to CLOCK_125_p
+set_location_assignment PIN_R20 -to CLOCK_50_B5B
+set_location_assignment PIN_N20 -to CLOCK_50_B6A
+set_location_assignment PIN_H12 -to CLOCK_50_B7A
+set_location_assignment PIN_M10 -to CLOCK_50_B8A
+
+#============================================================
+# SEG7
+#============================================================
+set_location_assignment PIN_V19 -to HEX0[0]
+set_location_assignment PIN_V18 -to HEX0[1]
+set_location_assignment PIN_V17 -to HEX0[2]
+set_location_assignment PIN_W18 -to HEX0[3]
+set_location_assignment PIN_Y20 -to HEX0[4]
+set_location_assignment PIN_Y19 -to HEX0[5]
+set_location_assignment PIN_Y18 -to HEX0[6]
+set_location_assignment PIN_AA18 -to HEX1[0]
+set_location_assignment PIN_AD26 -to HEX1[1]
+set_location_assignment PIN_AB19 -to HEX1[2]
+set_location_assignment PIN_AE26 -to HEX1[3]
+set_location_assignment PIN_AE25 -to HEX1[4]
+set_location_assignment PIN_AC19 -to HEX1[5]
+set_location_assignment PIN_AF24 -to HEX1[6]
+set_location_assignment PIN_AD7 -to HEX2[0]
+set_location_assignment PIN_AD6 -to HEX2[1]
+set_location_assignment PIN_U20 -to HEX2[2]
+set_location_assignment PIN_V22 -to HEX2[3]
+set_location_assignment PIN_V20 -to HEX2[4]
+set_location_assignment PIN_W21 -to HEX2[5]
+set_location_assignment PIN_W20 -to HEX2[6]
+set_location_assignment PIN_Y24 -to HEX3[0]
+set_location_assignment PIN_Y23 -to HEX3[1]
+set_location_assignment PIN_AA23 -to HEX3[2]
+set_location_assignment PIN_AA22 -to HEX3[3]
+set_location_assignment PIN_AC24 -to HEX3[4]
+set_location_assignment PIN_AC23 -to HEX3[5]
+set_location_assignment PIN_AC22 -to HEX3[6]
+
+#============================================================
+# Uart to USB
+#============================================================
+set_location_assignment PIN_L9 -to UART_TX
+set_location_assignment PIN_M9 -to UART_RX
+
+#============================================================
+# End of pin assignments by Terasic System Builder
+#============================================================
+
+
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_instance_assignment -name IO_STANDARD LVDS -to CLOCK_125_p
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50_B5B
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50_B6A
+set_instance_assignment -name IO_STANDARD "2.5 V" -to CLOCK_50_B7A
+set_instance_assignment -name IO_STANDARD "2.5 V" -to CLOCK_50_B8A
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[0]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[1]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[2]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[3]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[4]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[5]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX0[6]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[0]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[1]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[2]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[3]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[4]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[5]
+set_instance_assignment -name IO_STANDARD "1.2 V" -to HEX1[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to UART_TX
+set_instance_assignment -name IO_STANDARD "2.5 V" -to UART_RX
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name SDC_FILE ashbf_cpu.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/c5g_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/rom_pmem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/cpu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/core.sv
+set_global_assignment -name BINARY_FILE ../../build/pmem_bytecode.txt
+set_global_assignment -name SEARCH_PATH "/home/sdelang/verilog/ashbf-cpu/c5g/rtl"
+set_global_assignment -name SEARCH_PATH "/home/sdelang/verilog/ashbf-cpu/build"
+set_global_assignment -name SEARCH_PATH "/home/sdelang/verilog/ashbf-cpu/rtl"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
