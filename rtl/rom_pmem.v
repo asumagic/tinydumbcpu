@@ -1,6 +1,5 @@
 module rom_pmem
 (
-	input wire clock,
 	input wire [15:0] address,
 	output reg [2:0] data_out
 );

@@ -5,8 +5,8 @@ initial clock = 0;
 
 initial
 begin
-	$dumpfile("cpu.vcd");
-	$dumpvars(0, cpu_tb);
+	//$dumpfile("cpu.vcd");
+	//$dumpvars(0, cpu_tb);
 end
 
 always
