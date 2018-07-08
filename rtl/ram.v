@@ -1,3 +1,5 @@
+`default_nettype none
+
 module ram #(parameter addr_bits = 16, parameter data_bits = 8)
 (
 	input wire write_enable,

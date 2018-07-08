@@ -1,3 +1,5 @@
+`default_nettype none
+
 module rom_pmem
 (
 	input wire [15:0] address,
