@@ -12,23 +12,21 @@ module ram #(parameter addr_bits = 16, parameter data_bits = 8)
 
 	reg [data_bits - 1:0] bytes [(1 << addr_bits) - 1:0];
 
-	integer i; // For memory initialization
-
 initial
 begin
-	bytes <= '{default:8'b0};
+	bytes = '{default:0};
 end
 
 always @(address, data_in, write_enable)
 begin
 	if (write_enable)
 	begin
-		bytes[address] <= data_in;
-		data_out <= { data_bits{1'bX} };
+		bytes[address] = data_in;
+		data_out = 'X;
 	end
 	else
 	begin
-		data_out <= bytes[address];
+		data_out = bytes[address];
 	end
 end
 

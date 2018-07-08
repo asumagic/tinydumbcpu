@@ -79,7 +79,7 @@ reg [`STATE_WIDTH-1:0] state;
 
 initial
 begin
-	state <= `STATE_RESET;
+	state = `STATE_RESET;
 end
 
 always @(posedge clock)

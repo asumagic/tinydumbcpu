@@ -15,7 +15,7 @@ end
 
 always @(address)
 begin
-	data_out <= bytes[address];
+	data_out = bytes[address];
 end
 
 endmodule
