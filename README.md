@@ -6,9 +6,18 @@ This is a multiple cycle CPU.
 
 ![mandel.b under TDCPU, C5G](https://i.imgur.com/UnkMOtT.png)
 
+### Usage
+
+#### Simulation
+
+You will need a C++17-compliant compiler and Verilator.
+
+For *nix, do `./run.sh /path/to/a/brainfsck/source.b`.  
+It may take a while for the design to compile.
+
 ### Status
 
-- Can run mandelbrot compiled through bfcompiler in Icarus Verilog.
+- Can run mandelbrot compiled through bfcompiler and tested with Verilator.
 - Implemented for the [C5G board](http://c5g.terasic.com/) (Cyclone V GX Starter Kit).
 - Character input unimplemented.
 
