@@ -1,6 +1,6 @@
 `default_nettype none
 
-module uart_tx #(parameter freq_in = 50000000, parameter freq_out = 57600, parameter acc_precision = 16)
+module uart_tx #(parameter freq_in, parameter freq_out, parameter acc_precision = 16)
 (
 	input wire clock,
 

@@ -28,7 +28,11 @@ cpu cpu_inst
 	.out_data(cpu_out_data)
 );
 
-uart_tx tx
+uart_tx
+#(
+	.freq_in(50_000_000),
+	.freq_out(57_600)
+) tx
 (
 	.clock        (CLOCK_50_B7A),
 	.data_in      (cpu_out_data),
