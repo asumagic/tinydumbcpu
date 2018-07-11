@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 		{
 			if (top->out_en)
 			{
-				std::cout << char(top->out_data);
+				std::cout << char(top->out_data) << std::flush;
 			}
 
 			was_high_clock = true;
