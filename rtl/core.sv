@@ -61,6 +61,7 @@ module core
 
 // Opcode
 reg [`INSTR_WIDTH-1:0] opcode;
+reg [7:0] current_cell;
 
 // ALU states
 reg [`ALU_OP_WIDTH-1:0] alu_op;
@@ -71,7 +72,7 @@ reg [`WB_WIDTH-1:0] wb_destination;
 reg wb_en;
 
 // Op skip for loops
-reg [15:0] depth_counter;
+reg [7:0] depth_counter;
 
 // Machine state
 reg [`STATE_WIDTH-1:0] state;
@@ -106,17 +107,21 @@ begin
 
 		// Fetch the opcode
 		opcode <= pmem_data_read[`INSTR_WIDTH-1:0];
+
+		current_cell <= tape_data_read;
 	end
 
 	`STATE_DECODE:
 	begin
 		state <= `STATE_ALU_EXECUTE;
 
+		current_cell <= 'X;
+
 		case (opcode)
 
 		`INSTR_INC:
 		begin
-			alu_data[7:0] <= tape_data_read;
+			alu_data[7:0] <= current_cell;
 			alu_op <= `ALU_OP_INC;
 
 			wb_destination <= `WB_TAPE;
@@ -125,7 +130,7 @@ begin
 
 		`INSTR_DEC:
 		begin
-			alu_data[7:0] <= tape_data_read;
+			alu_data[7:0] <= current_cell;
 			alu_op <= `ALU_OP_DEC;
 
 			wb_destination <= `WB_TAPE;
@@ -152,7 +157,7 @@ begin
 
 		`INSTR_LLOOP:
 		begin
-			if (tape_data_read == 0)
+			if (current_cell == 0)
 			begin
 				depth_counter <= 0;
 				state <= `STATE_SKIP_RIGHT;
@@ -166,7 +171,7 @@ begin
 
 		`INSTR_RLOOP:
 		begin
-			if (tape_data_read != 0)
+			if (current_cell != 0)
 			begin
 				depth_counter <= 0;
 				state <= `STATE_SKIP_LEFT;
@@ -181,7 +186,7 @@ begin
 		`INSTR_COUT:
 		begin
 			out_en <= 1;
-			out_data <= tape_data_read;
+			out_data <= current_cell;
 			state <= `STATE_FETCH;
 			pc <= pc + 1;
 		end

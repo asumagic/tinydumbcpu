@@ -24,7 +24,7 @@ begin
 	if (write_enable)
 	begin
 		bytes[address] <= data_in;
-		data_out <= 'X;
+		data_out <= data_in;
 	end
 	else
 	begin
