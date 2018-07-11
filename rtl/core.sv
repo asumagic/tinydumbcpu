@@ -73,6 +73,8 @@ reg wb_en;
 
 // Op skip for loops
 reg [7:0] depth_counter;
+reg do_decr_depth;
+reg do_incr_depth;
 
 // Machine state
 reg [`STATE_WIDTH-1:0] state;
@@ -88,6 +90,9 @@ begin
 	out_en <= 0;
 	out_data <= 0;
 	tape_we <= 0;
+
+	do_decr_depth <= 0;
+	do_incr_depth <= 0;
 
 	// Handle what the current state is supposed to do
 	case (state)
@@ -106,7 +111,7 @@ begin
 		state <= `STATE_DECODE;
 
 		// Fetch the opcode
-		opcode <= pmem_data_read[`INSTR_WIDTH-1:0];
+		opcode <= pmem_data_read;
 
 		current_cell <= tape_data_read;
 	end
@@ -247,23 +252,23 @@ begin
 		pc <= pc - 1;
 
 		case (pmem_data_read)
+		`INSTR_LLOOP: do_decr_depth <= 1;
+		`INSTR_RLOOP: do_incr_depth <= 1;
+		default: begin end
+		endcase
 
-		`INSTR_LLOOP:
+		if (do_incr_depth)
+			depth_counter <= depth_counter + 1;
+
+		if (do_decr_depth)
 		begin
 			depth_counter <= depth_counter - 1;
-
 			if (depth_counter - 1 == 0)
 			begin
-				pc <= pc;
 				state <= `STATE_FETCH;
+				pc <= pc + 2;
 			end
 		end
-
-		`INSTR_RLOOP: depth_counter <= depth_counter + 1;
-
-		default: begin end
-
-		endcase
 	end
 
 	// '['
@@ -274,23 +279,23 @@ begin
 		pc <= pc + 1;
 
 		case (pmem_data_read)
+		`INSTR_LLOOP: do_incr_depth <= 1;
+		`INSTR_RLOOP: do_decr_depth <= 1;
+		default: begin end
+		endcase
 
-		`INSTR_LLOOP: depth_counter <= depth_counter + 1;
+		if (do_incr_depth)
+			depth_counter <= depth_counter + 1;
 
-		`INSTR_RLOOP:
+		if (do_decr_depth)
 		begin
 			depth_counter <= depth_counter - 1;
-
 			if (depth_counter - 1 == 0)
 			begin
-				pc <= pc;
 				state <= `STATE_FETCH;
+				pc <= pc;
 			end
 		end
-
-		default: begin end
-
-		endcase
 	end
 
 	endcase
