@@ -19,18 +19,19 @@ module core
 );
 
 // State definitions
-enum
+typedef enum
 {
-	STATE_RESET,
-	STATE_FETCH,
-	STATE_DECODE,
-	STATE_ALU_EXECUTE,
-	STATE_ALU_WRITEBACK,
-	STATE_SKIP_LEFT,
-	STATE_SKIP_RIGHT
-} state;
+	STATE_RESET = (1 << 0),
+	STATE_FETCH = (1 << 1),
+	STATE_DECODE = (1 << 2),
+	STATE_ALU_EXECUTE = (1 << 3),
+	STATE_ALU_WRITEBACK = (1 << 4),
+	STATE_SKIP_LEFT = (1 << 5),
+	STATE_SKIP_RIGHT = (1 << 6)
+} State;
+State state;
 
-enum [2:0]
+typedef enum logic [2:0]
 {
 	INSTR_INC,
 	INSTR_DEC,
@@ -40,7 +41,8 @@ enum [2:0]
 	INSTR_RLOOP,
 	INSTR_COUT,
 	INSTR_CIN
-} opcode;
+} Opcode;
+Opcode opcode;
 
 // Writeback destinations
 `define WB_WIDTH 1
@@ -104,7 +106,7 @@ begin
 		state <= STATE_DECODE;
 
 		// Fetch the opcode
-		opcode <= pmem_data_read;
+		opcode <= Opcode'(pmem_data_read);
 
 		current_cell <= tape_data_read;
 	end
