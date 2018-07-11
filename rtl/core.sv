@@ -25,11 +25,8 @@ module core
 `define STATE_DECODE        `STATE_WIDTH'd2
 `define STATE_ALU_EXECUTE   `STATE_WIDTH'd3
 `define STATE_ALU_WRITEBACK `STATE_WIDTH'd4
-`define STATE_SKIP          `STATE_WIDTH'd5
-
-// Skip direction definitions (for lloop/rloop)
-`define SKIP_DIR_LEFT        1'd0
-`define SKIP_DIR_RIGHT       1'd1
+`define STATE_SKIP_LEFT     `STATE_WIDTH'd5
+`define STATE_SKIP_RIGHT    `STATE_WIDTH'd6
 
 // Instruction definitions
 `define INSTR_WIDTH 3
@@ -75,7 +72,6 @@ reg wb_en;
 
 // Op skip for loops
 reg [15:0] depth_counter;
-reg skip_dir;
 
 // Machine state
 reg [`STATE_WIDTH-1:0] state;
@@ -159,8 +155,7 @@ begin
 			if (tape_data_read == 0)
 			begin
 				depth_counter <= 0;
-				skip_dir <= `SKIP_DIR_RIGHT;
-				state <= `STATE_SKIP;
+				state <= `STATE_SKIP_RIGHT;
 			end
 			else
 			begin
@@ -174,8 +169,7 @@ begin
 			if (tape_data_read != 0)
 			begin
 				depth_counter <= 0;
-				skip_dir <= `SKIP_DIR_LEFT;
-				state <= `STATE_SKIP;
+				state <= `STATE_SKIP_LEFT;
 			end
 			else
 			begin
@@ -240,61 +234,56 @@ begin
 
 	default: begin end
 
-	`STATE_SKIP:
+	// ']'
+	`STATE_SKIP_LEFT:
 	begin
-		state <= `STATE_SKIP;
+		state <= `STATE_SKIP_LEFT;
 
-		case (skip_dir)
+		pc <= pc - 1;
 
-		// ']'
-		`SKIP_DIR_LEFT:
+		case (pmem_data_read)
+
+		`INSTR_LLOOP:
 		begin
-			pc <= pc - 1;
+			depth_counter <= depth_counter - 1;
 
-			case (pmem_data_read)
-
-			`INSTR_LLOOP:
+			if (depth_counter - 1 == 0)
 			begin
-				depth_counter <= depth_counter - 1;
-
-				if ((depth_counter - 1) == 0)
-				begin
-					pc <= pc;
-					state <= `STATE_FETCH;
-				end
+				pc <= pc;
+				state <= `STATE_FETCH;
 			end
-
-			`INSTR_RLOOP: depth_counter <= depth_counter + 1;
-
-			default: begin end
-
-			endcase
 		end
 
-		// '['
-		`SKIP_DIR_RIGHT:
+		`INSTR_RLOOP: depth_counter <= depth_counter + 1;
+
+		default: begin end
+
+		endcase
+	end
+
+	// '['
+	`STATE_SKIP_RIGHT:
+	begin
+		state <= `STATE_SKIP_RIGHT;
+
+		pc <= pc + 1;
+
+		case (pmem_data_read)
+
+		`INSTR_LLOOP: depth_counter <= depth_counter + 1;
+
+		`INSTR_RLOOP:
 		begin
-			pc <= pc + 1;
+			depth_counter <= depth_counter - 1;
 
-			case (pmem_data_read)
-
-			`INSTR_LLOOP: depth_counter <= depth_counter + 1;
-
-			`INSTR_RLOOP:
+			if (depth_counter - 1 == 0)
 			begin
-				depth_counter <= depth_counter - 1;
-
-				if ((depth_counter - 1) == 0)
-				begin
-					pc <= pc;
-					state <= `STATE_FETCH;
-				end
+				pc <= pc;
+				state <= `STATE_FETCH;
 			end
-
-			default: begin end
-
-			endcase
 		end
+
+		default: begin end
 
 		endcase
 	end
