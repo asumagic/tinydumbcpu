@@ -1,8 +1,8 @@
 ## TinyDumbCPU
 
-First verilog project. Disregard the git history mess, my goal is far from doing an actually usable CPU ;)
+This is a multiple cycle CPU which is meant to execute (almost) unmodified Brainf\*ck source code.
 
-This is a multiple cycle CPU.
+Bear in mind, this is a messy learning SystemVerilog project. Review greatly appreciated.
 
 ### Usage
 
