@@ -4,16 +4,18 @@ First verilog project. Disregard the git history mess, my goal is far from doing
 
 This is a multiple cycle CPU.
 
-![mandel.b under TDCPU, C5G](https://i.imgur.com/UnkMOtT.png)
-
 ### Usage
 
 #### Simulation
 
-You will need a C++17-compliant compiler and Verilator.
+You need:
 
-For *nix, do `./run.sh /path/to/a/brainfsck/source.b`.  
-It may take a while for the design to compile.
+- [Verilator](https://www.veripool.org/wiki/verilator)
+- python3
+- A C++17 compiler (for the Verilator simulation)
+
+For \*nix, use `./run.sh /path/to/a/brainfsck/source.b`.  
+This will compile the design using Verilator, map your source file and execute it.
 
 ### Status
 
@@ -23,13 +25,10 @@ It may take a while for the design to compile.
 
 ### Instruction set
 
-The instruction set is identical to that of Brainf\*ck, but with different opcode for values, i.e. characters are mapped to the following bits by [bfcompiler](bfcompiler/main.cpp).
+The instruction set is identical to that of Brainf\*ck. However, the source has to be preprocessed and mapped by [bfcompiler](bfcompiler/compiler.py) into a file [that can be read by `$readmemb`](rtl/rom_pmem.sv).
 
-- `+` -> `000`
-- `-` -> `001`
-- `>` -> `010`
-- `<` -> `011`
-- `[` -> `100`
-- `]` -> `101`
-- `.` -> `110`
-- `,` -> `111`
+## Gallery
+
+Executing the famous mandelbrot program on the C5G board:
+
+![mandel.b under TDCPU, C5G](https://i.imgur.com/UnkMOtT.png)
